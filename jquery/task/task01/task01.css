@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+body {
+    font-weight: bold;
+}
+
+input {
+    font-weight: bold;
+}
+
+table {
+    width: 20%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+thead {
+    background-color: #fff9c4;
+}
+
+fieldset {
+    text-align: center;
+    margin: 0 auto;
+    width: 20%;
+}

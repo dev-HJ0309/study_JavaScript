@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery 이벤트</title>
+</head>
+<body>
+  <button>전체목록</button>
+  <ul>
+    <li>C언어</li>
+    <li>파이썬</li>
+    <li>자바</li>
+    <li>리액트</li>
+    <li>장고</li>
+    <li>깃</li>
+    <li>자바스크립트</li>
+    <li>ㅋㅋㅋ</li>
+  </ul>
+  
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+  $("button").on("click", () => {
+    // $("ul").hide();
+    // $("ul").toggle();
+    // $("ul").slideUp();
+    $("ul").slideToggle(200);
+    // $("ul").fadeOut();
+    // $("ul").fadeToggle();
+  });
+</script>
+</html>

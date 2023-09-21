@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>슬라이드 배너</title>
+    <link rel="stylesheet" href="banner.css">
+</head>
+<body>
+    <section class="banner-wrap">
+        
+        <div class="banner-container">
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+            <div class="image"></div>
+        </div>
+        <div class="main-slide-bottom">
+            <div class="inner">
+                <div class="main-slide-btns">
+                    <div class="swiper-count">
+                        <span id="swiper-current">1</span>
+                         / 
+                        <span class="swiper-total">8</span>
+                    </div>
+                    <div class="button Next" tabindex="0" role="button" aria-label="Next slide"></div>
+                    <div class="button Prev" tabindex="0" role="button" aria-label="Previous slide"></div>
+                    <!-- <button type="button" class="nextButton"></button> -->
+                    <!-- <button type="button" class="prevButton"></button> -->
+                </div>
+                <a href="#main-event" class="btn-slide-all">
+                    <span class="blind">이벤트 전체보기</span>
+                </a>
+            </div>
+        </div>
+
+            
+    </section>
+</body>
+<script>
+    // 배너 페이지 번호 출력 하기
+const swiperCurrent = document.getElementById("swiper-current")
+HTMLCollection.prototype.forEach = Array.prototype.forEach;
+let count = 0;
+
+const bannerWrap = document.querySelector("div.banner-container");
+const banners = document.querySelectorAll("div.image");
+banners.forEach((banner, i) => {
+    if(i == banners.length - 1) {
+        i = 0;
+    }
+    banner.style.backgroundImage = `url('ranking${i + 1}.jpg')`
+});
+
+let silde = setInterval(autoSlide, 2000);
+const buttons = document.querySelectorAll("div.buttons button");
+function autoSlide(){
+    bannerWrap.style.transition = `transform 0.5s`;
+    bannerWrap.style.transform = `translate(-${1500 * ++count}px)`;
+
+    if(count == 8){
+        setTimeout(() => {
+            bannerWrap.style.transition = `transform 0s`;
+            bannerWrap.style.transform = `translate(0)`;
+        }, 500)
+        count = 0;
+    }else{
+                
+            bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+            }
+            swiperCurrent.innerHTML = `${count + 1}`
+}
+// 이전 버튼, 다음 버튼 구현하기
+// const btns = document.querySelectorAll("div.button");
+const arrows = document.querySelectorAll("div.button");
+console.log(arrows)
+    var arrowButtonCheck = true;
+    arrows.forEach(arrow => {
+        arrow.addEventListener("click", function(){
+            if(arrowButtonCheck){
+                arrowButtonCheck = false;
+                clearInterval(silde);
+                bannerWrap.style.transition = "transform 0.5s"
+                let arrowType = arrow.classList[2];
+                if(arrowType == 'prev'){
+                    count--;
+                    if(count == -1){
+                        bannerWrap.style.transform = "translate(0vw)";
+                        setTimeout(function(){
+                            bannerWrap.style.transition = "transform 0s"
+                            bannerWrap.style.transform = "translate(-12000px)";
+                        }, 500);
+                        count = 7;
+                    }else{
+                        bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+                    }
+                }else{
+                    clearInterval(silde);
+                    count++;
+                    if(count == 8) {
+                        bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+                        setTimeout(function(){
+                            bannerWrap.style.transition = "transform 0s"
+                            bannerWrap.style.transform = "translate(-1500px)";
+                        }, 500);
+                        count = 0;
+                    }else{
+                        bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+                    }
+                }
+                // temp.style.backgroundColor = "#f0f0f0";
+                // temp = buttons[count];
+                // buttons[count].style.backgroundColor = "black";
+                silde = setInterval(autoSlide, 4000);
+                setTimeout(function(){
+                    arrowButtonCheck = true;
+                }, 500);
+            }
+        });
+    });
+    // var arrowButtonCheck = true;
+    // btns.forEach(nextButton => {
+    //     nextButton.addEventListener("click", function(){
+    //         if(arrowButtonCheck){
+    //             arrowButtonCheck = false;
+    //             clearInterval(silde);
+    //             bannerWrap.style.transition = "transform 0.5s"
+    //             let buttonType = nextButton.classList[2];
+    //             if(buttonType == 'Prev'){
+    //                 count--;
+    //                 if(count == -1){
+    //                     bannerWrap.style.transform = "translate(0px)";
+    //                     setTimeout(function(){
+    //                         bannerWrap.style.transition = "transform 0s"
+    //                         bannerWrap.style.transform = "translate(10500px)";
+    //                     }, 500);
+    //                     count = 7;
+    //                 }else{
+    //                     // console.log(count)
+    //                     bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+    //                 }
+    //             }else{
+    //                 count++;
+    //                 console.log(count)
+    //                 if(count == 8) {
+    //                     bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+    //                     setTimeout(function(){
+    //                         bannerWrap.style.transition = "transform 0s"
+    //                         bannerWrap.style.transform = "translate(-1500px)";
+    //                     }, 500);
+    //                     count = 0;
+    //                 }else{
+    //                     bannerWrap.style.transform = "translate(-" + 1500 * (count + 1) + "px)";
+    //                 }
+    //             }
+    //             temp.style.backgroundColor = "#f0f0f0";
+    //             temp = buttons[count];
+    //             buttons[count].style.backgroundColor = "black";
+    //             setTimeout(function(){
+    //                 arrowButtonCheck = true;
+    //             }, 500);
+    //         }
+    //     });
+    // });
+</script>
+</html>

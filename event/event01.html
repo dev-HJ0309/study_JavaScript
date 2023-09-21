@@ -1,0 +1,35 @@
+<!-- 객체마다 리스너가 프로퍼티로 되어 있어서
+그 자리에 원하는 함수를 넣어 주면 어떤 반응을 주었을 때
+함수 실행-->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>클릭 이벤트</title>
+</head>
+<body>
+  <h3>CSS 스타일 동적 변경</h3>
+  <hr>
+  <p>변경될 요소</p>
+  <input type="button" value="스타일 변경">
+</body>
+<script>
+  const input = document.querySelector("input[type='button']");
+  // class는 마침표 id는 #, id나 클래스 외에 다른 속성으로 찾아서 가져올 땐 []
+  // input 태그 가져오기
+
+  const p = document.querySelector("p");
+  // input.onclick = function(){console.log("들어옴!");}
+  input.addEventListener("click", function(e){
+                                      // e => 이벤트가 발생한 객체를 가져온다.
+    console.log(e.target);
+                // e.target은 input 객체
+    p.style.fontSize = "30px";
+    p.style.border = "3px dashed magenta";
+    p.style.width = "100px";
+  });
+</script>
+</html>

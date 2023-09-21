@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="task02.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <title>숫자를 한글로 변경</title>
+</head>
+<body>
+    <div id="round">1</div>
+    <fieldset>
+        <legend>숫자를 한글로 변경</legend>
+        <p id="result">결과 표시 부분</p>
+        <input type="text" name="input">
+        <br>
+        <button id="change">변경</button>
+    </fieldset>
+</body>
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script>
+    function change(number){
+    // const numbering = document.querySelector("#round");
+    // const p = document.querySelector("#result");
+    const $numbering = $("#round");
+    const $p = $("#result");
+    const hangle = "공일이삼사오육칠팔구";
+    let result = '';
+
+    if(isNaN(number)){
+        // numbering.innerText = '4';
+        // p.innerText = '숫자만 입력할 수 있습니다.';
+        $numbering.text('4');
+        $p.text('숫자만 입력할 수 있습니다.')
+        return;
+    }
+
+    // numbering.innerText = '3';
+    $numbering.text('3');
+    
+    if(number.includes('.')){
+        // numbering.innerText = '2';
+        $numbering.text('2');
+    }
+
+    number.split("").forEach(i => {
+        result += hangle[i];
+    });
+
+    result = result.replace('undefined', '점')
+    // p.innerText = result;
+    $p.text(result);
+}
+
+function getResult(callback){
+    // const input = document.querySelector("input[name=input]").value;
+    const input = $('input[name=input]').val();
+    if(callback(input));
+}
+
+
+</script>
+<script>
+    document.querySelector("#change").addEventListener("click", () => {getResult(change)});
+</script>
+</html>
